@@ -104,6 +104,10 @@ class Order(models.Model):
             self.token_number = uuid.uuid4().hex[:6].upper()
         super().save(*args, **kwargs)
 
+    @property
+    def total_price(self):
+        return sum(item.menu_item.price * item.quantity for item in self.items.all())
+
     def __str__(self):
         return f"Order {self.id} - {self.customer.full_name}"
 
