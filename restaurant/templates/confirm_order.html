@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main role="main" class="container">
+    <h1 class="booking-title">Confirm Your Order</h1>
+
+    <ul class="order-list">
+        {% for item in order.items.all %}
+            <li class="order-item">
+                <span class="item-name">{{ item.menu_item.name }}</span> -
+                <span class="item-price">Rs. {{ item.menu_item.price }}</span> x
+                <span class="item-quantity">{{ item.quantity }}</span>
+                <form method="POST" action="{% url 'update_cart' item.id %}" class="update-form" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="number" name="quantity" value="{{ item.quantity }}" min="0" required class="form-control quantity-input">
+                    <button type="submit" class="btn-submit">Update</button>
+                </form>
+            </li>
+        {% empty %}
+            <li>There are no items in your cart.</li>
+        {% endfor %}
+    </ul>
+
+    <p class="total-price"><strong>Total Price:</strong> Rs. {{ order.total_price }}</p>
+
+    <form method="POST" action="{% url 'confirm_order' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn-submit confirm-order">Confirm Order</button>
+    </form>
+
+    <p>
+        <a href="{% url 'menu' %}" class="btn-submit back-to-menu">Back to Menu</a>
+    </p>
+
+    {% if messages %}
+    <ul class="errorlist">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</main>
+
+<style>
+    /* Additional styles specific to the Confirm Order page */
+    .order-list {
+        list-style: none; /* Remove default list styling */
+        padding: 0; /* Remove padding */
+        margin: 1rem 0; /* Add margin for spacing */
+    }
+
+    .order-item {
+        display: flex; /* Flex layout for order items */
+        justify-content: space-between; /* Space between item details and form */
+        align-items: center; /* Align items vertically */
+        margin-bottom: 1rem; /* Space between order items */
+        padding: 0.5rem 1rem; /* Padding for item container */
+        background-color: #f9f9f9; /* Light background for items */
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    }
+
+    .item-name {
+        font-weight: bold; /* Bold font for item names */
+    }
+
+    .item-price, .item-quantity {
+        margin-left: 0.5rem; /* Space between price and quantity */
+    }
+
+    .quantity-input {
+        width: 60px; /* Fixed width for quantity input */
+        margin-left: 1rem; /* Space to the left of the input */
+        padding: 0.25rem; /* Inner padding for input */
+        border-radius: 4px; /* Rounded corners for input */
+        border: 1px solid #ccc; /* Light border */
+    }
+
+    .total-price {
+        font-size: 1.25rem; /* Larger font size for total price */
+        font-weight: bold; /* Bold font for emphasis */
+        margin-top: 1rem; /* Spacing above the total price */
+    }
+
+    .confirm-order {
+        background-color: var(--accent-color); /* Tomato background for the confirm button */
+        width: 100%; /* Full width for button */
+        padding: 0.75rem; /* Padding for button */
+        border-radius: 4px; /* Rounded corners */
+        color: white; /* White text */
+        font-size: 1rem; /* Consistent font size */
+        cursor: pointer; /* Pointer cursor on hover */
+        transition: background-color 0.3s ease; /* Smooth background color transition */
+    }
+
+    .confirm-order:hover {
+        background-color: #e5533d; /* Darken button on hover */
+    }
+
+    .back-to-menu {
+        display: inline-block; /* Inline block for better spacing */
+        margin-top: 1rem; /* Spacing above the button */
+    }
+
+    .errorlist {
+        color: red; /* Red color for error messages */
+        margin-top: 1rem; /* Space above the error list */
+    }
+</style>
+{% endblock %}

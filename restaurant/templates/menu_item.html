@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section style="background-color: #f5f5dc; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+    <article style="max-width: 1200px; margin: 0 auto;">
+        <h1 style="text-align: center; color: var(--secondary-color);">Menu Item</h1>
+        <span style="display: block; text-align: center; margin-bottom: 1.5rem;">
+            <a href="{% url 'home' %}" style="text-decoration: none; color: var(--accent-color);">Home</a> /
+            <a href="{% url 'menu' %}" style="text-decoration: none; color: var(--accent-color);">Menu</a> /
+            <span style="font-weight: bold; color: var(--secondary-color);">{{ menu_item.name }}</span>
+        </span>
+        <div class="row" style="display: flex; flex-wrap: wrap; gap: 2rem;">
+            <div class="column" style="flex: 1; min-width: 300px;">
+                <h2 style="color: var(--accent-color); font-size: 2rem;">{{ menu_item.name }}</h2>
+                <p style="font-size: 1.2rem; line-height: 1.5;">{{ menu_item.description }}</p>
+                <p style="font-size: 1.2rem;">Price: <span style="font-weight: bold; color: var(--secondary-color);">Rs. {{ menu_item.price }}.00</span></p>
+                {% if menu_item.status == 1 %}
+                    <p style="color: green; font-weight: bold;">Status: Available</p>
+                {% else %}
+                    <p style="color: red; font-weight: bold; text-decoration: line-through;">Status: Unavailable</p>
+                {% endif %}
+            </div>
+            <div class="column" style="flex: 1; min-width: 300px;">
+                <img src="{% static 'img/menu_items/' %}{{ menu_item.name }}.jpg" alt="{{ menu_item.name }}" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);" />
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 2rem;">
+            <a href="{% url 'menu' %}" class="cta" style="background-color: var(--accent-color); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; transition: background-color 0.3s;">
+                Back to Menu
+            </a>
+        </p>
+    </article>
+</section>
+{% endblock %}

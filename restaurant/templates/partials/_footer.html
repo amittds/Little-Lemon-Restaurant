@@ -1,0 +1,14 @@
+{% load static %}
+<footer style="background-color: #EDEFEE; padding: 1rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #495E57;">
+    <article style="flex: 1;">
+        <img src="{% static 'img/logo_footer.png' %}" alt="Little Lemon Logo" style="max-width: 150px; height: auto;">
+    </article>
+    <article style="flex: 2; text-align: center;">
+        <p style="font-size: 1.2rem; color: #333;">&copy; {{ current_year }} Little Lemon. All rights reserved.</p>
+    </article>
+    <article style="flex: 1; text-align: right;">
+        <p style="font-size: 1rem; color: #666;">Follow us:</p>
+        <a href="#" style="margin-right: 10px; color: #EE9972;">Facebook</a>
+        <a href="#" style="color: #EE9972;">Instagram</a>
+    </article>
+</footer>

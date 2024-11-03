@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  body {
+    background-color: #f7f9fc; /* Light background for a clean look */
+    font-family: Arial, sans-serif; /* Modern font */
+    color: #333; /* Darker text for readability */
+  }
+
+  .cancel-container {
+    max-width: 600px; /* Max width for better readability */
+    margin: 2rem auto; /* Centering the container */
+    padding: 2rem;
+    background-color: #ffffff; /* White background for the card */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+
+  h1 {
+    color: #d9534f; /* Red color for the heading to indicate cancellation */
+    text-align: center; /* Center align the heading */
+    margin-bottom: 1rem; /* Spacing below the heading */
+  }
+
+  p {
+    font-size: 1.1em; /* Slightly larger font size */
+    margin: 0.5rem 0; /* Margin for spacing */
+  }
+
+  .button-container {
+    text-align: center; /* Center the buttons */
+    margin-top: 2rem; /* Space above the button area */
+  }
+
+  button {
+    padding: 10px 20px;
+    background-color: #d9534f; /* Red background for the confirm button */
+    color: white; /* White text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 1em; /* Font size */
+    transition: background-color 0.3s, transform 0.3s; /* Transition for hover effects */
+  }
+
+  button:hover {
+    background-color: #c9302c; /* Darker red on hover */
+    transform: translateY(-2px); /* Slightly lift on hover */
+  }
+
+  a {
+    display: inline-block; /* Block display for button-like appearance */
+    margin-top: 10px; /* Space above the link */
+    padding: 10px 20px;
+    background-color: #008CBA; /* Blue background for the button */
+    color: white; /* White text color */
+    text-decoration: none; /* No underline */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s, transform 0.3s; /* Transition for hover effects */
+  }
+
+  a:hover {
+    background-color: #005f73; /* Darker blue on hover */
+    transform: translateY(-2px); /* Slightly lift on hover */
+  }
+</style>
+
+<div class="cancel-container">
+  <h1>Cancel Booking</h1>
+  <p>Are you sure you want to cancel this booking?</p>
+  <p><strong>Booking ID:</strong> {{ booking.id }}</p>
+  <p><strong>Name:</strong> {{ booking.first_name }} {{ booking.last_name }}</p>
+  <p><strong>Booking Date:</strong> {{ booking.booking_date }}</p>
+  <p><strong>Booking Time:</strong> {{ booking.get_booking_time_am_pm }}</p>
+
+  <form method="post">
+      {% csrf_token %}
+      <div class="button-container">
+          <button type="submit">Confirm Cancellation</button>
+      </div>
+  </form>
+
+  <div class="button-container">
+      <a href="{% url 'booking_confirmation' pk=booking.pk %}">Go Back</a>
+  </div>
+</div>
+{% endblock %}

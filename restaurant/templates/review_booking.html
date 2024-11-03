@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  body {
+    background-color: #f7f9fc; /* Light background for a clean look */
+    font-family: Arial, sans-serif; /* Modern font */
+    color: #333; /* Darker text for readability */
+  }
+
+  .review-container {
+    max-width: 600px; /* Max width for better readability */
+    margin: 2rem auto; /* Centering the container */
+    padding: 2rem;
+    background-color: #ffffff; /* White background for the card */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+
+  h1 {
+    color: #4CAF50; /* Green color for the heading */
+    text-align: center; /* Center align the heading */
+    margin-bottom: 1rem; /* Spacing below the heading */
+  }
+
+  p {
+    font-size: 1.1em; /* Slightly larger font size */
+    margin: 0.5rem 0; /* Margin for spacing */
+  }
+
+  .booking-details {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border: 1px solid #e0e0e0; /* Border for details section */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light gray background for details */
+  }
+
+  .booking-details strong {
+    color: #333; /* Darker color for labels */
+  }
+
+  .button-container {
+    text-align: center; /* Center the buttons */
+    margin-top: 1.5rem;
+  }
+
+  a {
+    display: inline-block; /* Block display for button-like appearance */
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #008CBA; /* Blue background for buttons */
+    color: white; /* White text color */
+    text-decoration: none; /* No underline */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s, transform 0.3s; /* Transition for hover effects */
+  }
+
+  a:hover {
+    background-color: #005f73; /* Darker blue on hover */
+    transform: translateY(-2px); /* Slightly lift on hover */
+  }
+
+  @media (max-width: 600px) {
+    /* Responsive adjustments */
+    .review-container {
+      padding: 1rem;
+    }
+    a {
+      padding: 8px 15px; /* Smaller padding on buttons for mobile */
+    }
+  }
+</style>
+
+<div class="review-container">
+  <h1>Review Booking</h1>
+  <div class="booking-details">
+    <p><strong>Booking ID:</strong> {{ booking.id }}</p>
+    <p><strong>Name:</strong> {{ booking.first_name }} {{ booking.last_name }}</p>
+    <p><strong>Guests:</strong> {{ booking.guest_number }}</p>
+    <p><strong>Booking Date:</strong> {{ booking.booking_date }}</p>
+    <p><strong>Booking Time:</strong> {{ booking.get_booking_time_am_pm }}</p>
+    <p><strong>Comment:</strong> {{ booking.comment }}</p>
+  </div>
+
+  <div class="button-container">
+    <p>If you wish to make another booking or cancel this one, please choose an option below:</p>
+    <a href="{% url 'book' %}">Make a New Booking</a>
+    <a href="{% url 'cancel_booking' pk=booking.pk %}">Cancel Booking</a>
+  </div>
+</div>
+{% endblock %}

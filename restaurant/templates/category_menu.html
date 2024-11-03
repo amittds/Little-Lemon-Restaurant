@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="menu-category">
+    <article>
+        <h1 class="heading_shadow">Menu</h1>
+
+        <h2 class="category-title">{{ category }}</h2>
+
+        {% if menu_items %}
+            <ul class="menu-list">
+                {% for item in menu_items %}
+                    <li class="menu-item {% if item.status == 0 %}strikethrough{% endif %}">
+                        <a href="{% url 'display_menu_items' item.pk %}" class="menu-link">{{ item.name }}</a>
+                        <span class="menu-price">Rs. {{ item.price }}.00</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-category">No items available in this category.</p>
+        {% endif %}
+
+        <p>
+            <a href="{% url 'menu' %}" class="cta back-to-menu">Back to Menu</a>
+        </p>
+    </article>
+</section>
+
+<style>
+    /* Styles specific to the menu category page */
+    .menu-category {
+        background-color: #f5f5dc; /* Soft beige background */
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .heading_shadow {
+        color: #343a40; /* Dark grey for contrast */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1rem;
+    }
+
+    .category-title {
+        font-size: 1.8rem; /* Larger font size for category name */
+        color: #343a40; /* Dark grey color */
+        margin: 0.5rem 0 1.5rem; /* Spacing around category title */
+        font-weight: 600; /* Slightly bolder for emphasis */
+        text-align: center; /* Center align category title */
+    }
+
+    .menu-list {
+        list-style-type: none; /* Remove default list styling */
+        padding: 0;
+    }
+
+    .menu-item {
+        margin: 1rem 0;
+        font-size: 1.2rem;
+        transition: transform 0.3s;
+    }
+
+    .menu-item:hover {
+        transform: scale(1.02); /* Slightly scale up on hover */
+    }
+
+    .menu-link {
+        color: #ff6347; /* Tomato color for links */
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .menu-link:hover {
+        color: #ffd700; /* Gold on hover */
+        text-decoration: underline;
+    }
+
+    .menu-price {
+        font-weight: bold;
+        float: right; /* Align price to the right */
+    }
+
+    .empty-category {
+        color: #ff6347; /* Tomato for no items available */
+        font-style: italic;
+        text-align: center; /* Center align empty category message */
+    }
+
+    .back-to-menu {
+        display: inline-block;
+        margin-top: 1.5rem;
+        padding: 0.5rem 1rem;
+        background-color: #343a40; /* Dark grey background */
+        color: white;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+        text-align: center; /* Center align button */
+    }
+
+    .back-to-menu:hover {
+        background-color: #ff6347; /* Change color on hover */
+    }
+</style>
+{% endblock %}

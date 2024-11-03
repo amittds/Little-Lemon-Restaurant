@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <section>
+        <article id="hero">
+            <h1 class="heading_shadow">SPECIAL OFFER</h1>
+            <p>30% Off This Weekend</p>
+            <a href="#" class="cta">Book now</a>
+        </article>
+    </section>
+
+    <section style="padding: 2rem; background-color: #f5f5dc; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+        <article style="padding: 1.5rem; background-color: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+            <h2>Our New Menu</h2>
+            <img src="{% static 'img/grill.jpg' %}" style="max-width: 100%; border-radius: 8px;">
+            <p>Our menu consists of 12-15 seasonal items based on Italian, Greek, and Turkish culture.</p>
+            <p><a href="{% url 'menu' %}">See our new menu</a></p>
+        </article>
+        <article style="padding: 1.5rem; background-color: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+            <h2>Book a table</h2>
+            <img src="{% static 'img/salad.jpg' %}" style="max-width: 100%; border-radius: 8px;">
+            <p>Reserve your table for an Italian, Greek, and Turkish dining experience.</p>
+            <p><a href="{% url 'book' %}">Book your table now</a></p>
+        </article>
+        <article style="padding: 1.5rem; background-color: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+            <h2>Opening Hours</h2>
+            <img src="{% static 'img/head_chef.jpg' %}" style="max-width: 100%; border-radius: 8px;">
+            <p>The Little Lemon Restaurant is open 7 days a week, except for public holidays.</p>
+            <ul>
+                <li>Mon - Fri: 2pm - 10pm</li>
+                <li>Sat: 2pm - 11pm</li>
+                <li>Sun: 2pm - 11pm</li>
+            </ul>
+        </article>
+    </section>
+</div>
+{% endblock %}

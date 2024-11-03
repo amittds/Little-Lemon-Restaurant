@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main role="main" class="container">
+    <h1 class="booking-title">Customer Login</h1>
+    <form method="POST" action="{% url 'customer_login' %}" class="booking-card">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="mobile_number">Mobile Number:</label>
+            <input type="text" name="mobile_number" id="mobile_number" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="full_name">Full Name:</label>
+            <input type="text" name="full_name" id="full_name" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn-submit">Log In</button>
+    </form>
+
+    {% if messages %}
+    <ul class="errorlist">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</main>
+
+<style>
+    /* Additional styles specific to the customer login page */
+    .booking-title {
+        text-align: center;
+        font-family: 'Markazi Text', serif; /* Use a decorative font */
+        color: var(--secondary-color); /* Match with the theme */
+        margin-bottom: 1rem; /* Spacing below the title */
+    }
+
+    .booking-card {
+        background-color: var(--booking-background); /* Soft beige for booking background */
+        padding: 2rem; /* Add padding for inner spacing */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        max-width: 400px; /* Limit the width for better focus */
+        margin: 0 auto; /* Center the form */
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem; /* Space between form elements */
+    }
+
+    label {
+        display: block; /* Make labels block for better spacing */
+        margin-bottom: 0.5rem; /* Spacing below the label */
+        font-weight: bold; /* Make labels bold */
+    }
+
+    input[type="text"] {
+        width: 100%; /* Full width input */
+        padding: 0.75rem; /* Inner padding for input */
+        border: 1px solid #ccc; /* Light border */
+        border-radius: 4px; /* Rounded corners for inputs */
+        transition: border-color 0.3s ease; /* Smooth transition for border color */
+    }
+
+    input[type="text"]:focus {
+        border-color: var(--accent-color); /* Change border color on focus */
+        outline: none; /* Remove default outline */
+    }
+
+    .btn-submit {
+        background-color: var(--accent-color); /* Tomato background for the button */
+        color: white; /* White text */
+        border: none; /* No border */
+        padding: 0.75rem 1.5rem; /* Increased padding */
+        border-radius: 4px; /* Rounded corners */
+        font-weight: bold; /* Make the button text bold */
+        cursor: pointer; /* Pointer cursor on hover */
+        transition: background-color 0.3s ease; /* Smooth background color transition */
+        width: 100%; /* Full width for the button */
+    }
+
+    .btn-submit:hover {
+        background-color: #e5533d; /* Darken button on hover */
+    }
+
+    .errorlist {
+        color: red; /* Red color for error messages */
+        margin-top: 1rem; /* Space above the error list */
+    }
+</style>
+{% endblock %}

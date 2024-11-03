@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main role="main" class="container">
+    <h1 class="booking-title">Order Summary</h1>
+
+    <p class="order-details"><strong>Token Number:</strong> {{ order.token_number }}</p>
+    <p class="order-details"><strong>Order Date:</strong> {{ order.created_at }}</p>
+
+    <ul class="order-list">
+        {% for item in order.items.all %}
+            <li class="order-item">{{ item.quantity }} x <span class="item-name">{{ item.menu_item.name }}</span> - Rs. {{ item.item_price|floatformat:2 }}</li>
+        {% empty %}
+            <li>No items in this order.</li>
+        {% endfor %}
+    </ul>
+
+    <p class="total-price"><strong>Total Price:</strong> Rs. {{ order.total_price|floatformat:2 }}</p>
+
+    {% if messages %}
+    <ul class="errorlist">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div class="button-group">
+        <a href="{% url 'home' %}" class="btn-submit back-to-home">Back to Home</a>
+        <a href="{% url 'menu' %}" class="btn-submit back-to-menu">Back to Menu</a>
+    </div>
+</main>
+
+<style>
+    /* Additional styles specific to the Order Summary page */
+    .order-details {
+        font-size: 1.1rem; /* Slightly larger font for order details */
+        margin: 0.5rem 0; /* Margin for spacing */
+    }
+
+    .order-list {
+        list-style: none; /* Remove default list styling */
+        padding: 0; /* Remove padding */
+        margin: 1rem 0; /* Add margin for spacing */
+    }
+
+    .order-item {
+        padding: 0.5rem; /* Padding for item container */
+        border-bottom: 1px solid #ddd; /* Light border for separation */
+    }
+
+    .item-name {
+        font-weight: bold; /* Bold font for item names */
+    }
+
+    .total-price {
+        font-size: 1.25rem; /* Larger font size for total price */
+        font-weight: bold; /* Bold font for emphasis */
+        margin-top: 1rem; /* Spacing above the total price */
+    }
+
+    .button-group {
+        margin-top: 1rem; /* Margin for spacing above buttons */
+    }
+
+    .btn-submit {
+        display: inline-block; /* Inline block for better spacing */
+        margin-right: 1rem; /* Space between buttons */
+        padding: 0.75rem 1.5rem; /* Padding for button */
+        background-color: var(--accent-color); /* Button background color */
+        color: white; /* White text */
+        border-radius: 4px; /* Rounded corners */
+        text-align: center; /* Center text */
+        transition: background-color 0.3s ease; /* Smooth background color transition */
+    }
+
+    .btn-submit:hover {
+        background-color: #e5533d; /* Darken button on hover */
+    }
+
+    .errorlist {
+        color: red; /* Red color for error messages */
+        margin-top: 1rem; /* Space above the error list */
+    }
+</style>
+{% endblock %}

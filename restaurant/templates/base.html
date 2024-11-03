@@ -1,0 +1,180 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Little Lemon</title>
+    <meta name="description" content="A family-owned Mediterranean restaurant focused on traditional recipes served with a modern twist." />
+    <meta name="author" content="Little Lemon Restaurant, Chicago, Illinois" />
+
+    <!-- Load favicon -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}" />
+
+    <!-- Include CSS files -->
+    <link rel="preload" as="style" href="{% static 'css/style.css' %}" onload="this.rel='stylesheet'" />
+    <noscript>
+      <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    </noscript>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&family=Markazi+Text:wght@400;500&display=swap" rel="stylesheet" />
+
+    <!-- Custom theme colors and styles -->
+    <style>
+      :root {
+        --primary-color: #ffd700; /* Gold */
+        --secondary-color: #343a40; /* Dark grey */
+        --accent-color: #ff6347; /* Tomato */
+        --text-color: #333333;
+        --background-color: #f4f4f4;
+        --booking-background: #f2e9e4; /* Soft beige for booking background */
+      }
+
+      body {
+        margin: 0;
+        font-family: "Karla", sans-serif;
+        color: var(--text-color);
+        background-color: var(--background-color);
+        line-height: 1.6;
+      }
+
+      a {
+        color: var(--accent-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      a:hover {
+        color: var(--primary-color);
+        text-decoration: underline;
+      }
+
+      header, footer {
+        background-color: var(--secondary-color);
+        color: white;
+        padding: 1.5rem 0;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .container {
+        max-width: 1200px; /* Set max width for the container */
+        margin: 0 auto; /* Center the container */
+        padding: 0 15px; /* Add horizontal padding */
+      }
+
+      main {
+        margin: 2rem 0;
+        padding: 1.5rem;
+        background-color: white;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      main:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      footer p {
+        margin: 0;
+      }
+
+      @media (max-width: 768px) {
+        main {
+          margin: 1rem;
+          padding: 1rem;
+        }
+      }
+
+      /* Header adjustments */
+      .header-content {
+        display: flex;
+        justify-content: space-between; /* Space between menu heading and action buttons */
+        align-items: center; /* Center items vertically */
+        margin-bottom: 1.5rem; /* Add margin below the header */
+      }
+
+      .header-actions {
+        display: flex;
+        gap: 1rem; /* Space between login and cart buttons */
+      }
+
+      /* Additional styling for headings */
+      h1, h2, h3 {
+        font-family: 'Markazi Text', serif;
+        margin: 1.5rem 0 1rem;
+        color: var(--secondary-color);
+      }
+
+      /* Menu item layout */
+      .menu-item {
+        display: flex;
+        justify-content: space-between; /* Space between item name and button */
+        align-items: center; /* Center items vertically */
+        margin-bottom: 1rem; /* Space between menu items */
+      }
+
+      .menu-item .item-name {
+        flex: 1; /* Take available space */
+      }
+
+      .menu-item .item-price {
+        margin-right: 1rem; /* Add margin to the right of the price */
+      }
+
+      .btn-add-to-cart, .btn-submit {
+        background-color: var(--accent-color);
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem; /* Increased padding for better touch area */
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-size: 1rem; /* Set a standard font size */
+        font-weight: bold; /* Make the text bold */
+      }
+
+      /* Optional hover effect for buttons */
+      .btn-add-to-cart:hover, .btn-submit:hover {
+        background-color: #e5533d; /* Darken on hover */
+      }
+
+      /* Responsive button adjustments */
+      @media (max-width: 768px) {
+        .btn-add-to-cart, .btn-submit {
+          width: 100%; /* Full width on mobile */
+        }
+      }
+    </style>
+</head>
+
+<body>
+    <!-- Header with a logo, navigation, and potential calls to action -->
+    <header>
+        <div class="container">
+            {% include 'partials/_header.html' %}
+        </div>
+    </header>
+
+    <!-- Main content area -->
+    <div class="container">
+        <main role="main">{% block content %}{% endblock %}</main>
+    </div>
+
+    <!-- Footer with social media icons, quick links, and contact information -->
+    <footer>
+        <div class="container">
+            {% include 'partials/_footer.html' %}
+        </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <script src="{% static 'js/main.js' %}" defer></script>
+</body>
+</html>
