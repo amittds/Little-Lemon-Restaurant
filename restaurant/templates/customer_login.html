@@ -21,7 +21,9 @@
     {% if messages %}
     <ul class="errorlist">
         {% for message in messages %}
-            <li>{{ message }}</li>
+            {% if "logged in" in message %}
+                <li>{{ message }}</li>
+            {% endif %}
         {% endfor %}
     </ul>
     {% endif %}
