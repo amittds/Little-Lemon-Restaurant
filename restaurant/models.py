@@ -1,4 +1,4 @@
-cfrom django.db import models
+from django.db import models
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator, MinValueValidator
 from datetime import date, time, timedelta
@@ -43,7 +43,7 @@ class Booking(models.Model):
     phone_number = models.CharField(
         max_length=13,
         validators=[RegexValidator(regex=r'^\d{10}$',
-                                   message="Phone number must be a valid number. E.g., '9876543210' ")],
+                                   message="Phone number must be a valid number. E.g., '+919876543210' ")],
     )
     guest_number = models.PositiveIntegerField()
     booking_date = models.DateField(default=date.today)
